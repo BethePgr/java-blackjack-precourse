@@ -1,7 +1,9 @@
 package domain.card;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import domain.model.card.Card;
+import domain.model.card.CardFactory;
+import domain.model.card.Symbol;
+import domain.model.card.Type;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
