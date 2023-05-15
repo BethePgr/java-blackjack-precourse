@@ -2,17 +2,19 @@ package domain.controller;
 
 import domain.model.BlackJackGame;
 import domain.model.user.Player;
+import domain.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlackJackController {
 
-    public void run(){
+    public static void main(String[] args) {
         List<String> names = InputController.inputPlayerNames();
-        new BlackJackGame(createPlayerLists(names));
+        BlackJackGame blackJackGame = new BlackJackGame(createPlayerLists(names));
+        OutputView.printAllCardsOfDealerAndPlayers(blackJackGame);
     }
 
-    private List<Player> createPlayerLists(List<String> names) {
+    private static List<Player> createPlayerLists(List<String> names) {
         List<Player> playerList = new ArrayList<>();
         for(String name : names){
             int money = InputController.inputPlayerBettingMoney(name);
