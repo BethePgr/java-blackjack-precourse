@@ -13,14 +13,29 @@ public class BlackJackGame {
     private final List<Player> players;
     private final List<Card> CardDeck;
 
-    public BlackJackGame(){
+    public BlackJackGame(List<Player> players){
         dealer = new Dealer();
-        players = new ArrayList<>();
+        this.players = players;
         CardDeck = CardFactory.create();
+        giveTwoCardsToEachPlayer();
     }
 
     public void addPlayer(Player player){
         players.add(player);
     }
 
+    private void giveTwoCardsToEachPlayer(){
+        for(Player player : players){
+            addCardToPlayer(player);
+        }
+    }
+
+    private void addCardToPlayer(Player player) {
+        for(int i = 0;i<2;i++) {
+            int size = CardDeck.size();
+            int index = (int) (Math.random() * size);
+            Card card = CardDeck.remove(index);
+            player.addCard(card);
+        }
+    }
 }
