@@ -22,8 +22,10 @@ class BlackJackGameTest {
         BlackJackGame blackJackGame = new BlackJackGame(playerList);
 
         assertEquals(2,player.getCards().size());
-        assertEquals(CardFactory.create().size()-2,blackJackGame.getCardDeck().size());
+        assertEquals(CardFactory.create().size()-4,blackJackGame.getCardDeck().size());
+        assertFalse(blackJackGame.getCardDeck().containsAll(blackJackGame.getDealer().getCards()));
         assertFalse(blackJackGame.getCardDeck().containsAll(player.getCards()));
+        assertTrue(blackJackGame.getDealer().getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
         assertTrue(player.getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
     }
 
@@ -39,9 +41,11 @@ class BlackJackGameTest {
 
         assertEquals(2,player.getCards().size());
         assertEquals(2,player2.getCards().size());
-        assertEquals(CardFactory.create().size()-4,blackJackGame.getCardDeck().size());
+        assertEquals(CardFactory.create().size()-6,blackJackGame.getCardDeck().size());
         assertFalse(blackJackGame.getCardDeck().containsAll(player.getCards()));
         assertFalse(blackJackGame.getCardDeck().containsAll(player2.getCards()));
+        assertFalse(blackJackGame.getCardDeck().containsAll(blackJackGame.getDealer().getCards()));
+        assertTrue(blackJackGame.getDealer().getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
         assertTrue(player.getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
         assertTrue(player2.getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
     }
