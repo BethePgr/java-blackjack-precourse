@@ -35,8 +35,15 @@ public class OutputView {
     private static String showCardsDetail(List<Card> cards){
         StringBuilder str = new StringBuilder();
         for(Card card : cards){
-            str.append(card.getSymbol().getScore()).append(card.getType().getName()).append(",");
+            str.append(getSymbolOrNumber(card)).append(card.getType().getName()).append(",");
         }
         return str.deleteCharAt(str.length() - 1).toString();
+    }
+
+    private static String getSymbolOrNumber(Card card){
+        if(card.getSymbol().getScore() == 10 && !card.getSymbol().toString().startsWith("T")){
+            return card.getSymbol().toString().substring(0,1);
+        }
+        return String.valueOf(card.getSymbol().getScore());
     }
 }

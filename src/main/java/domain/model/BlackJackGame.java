@@ -14,7 +14,6 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final List<Player> players;
     private final List<Card> cardDeck;
-    private final Set<Integer> set = new HashSet<>();
 
     public BlackJackGame(List<Player> players) {
         dealer = new Dealer();
@@ -44,14 +43,10 @@ public class BlackJackGame {
         }
     }
 
-    private Card selectOneCard() {
-
-        int index = (int) (Math.random() * cardDeck.size());
-        if (!set.contains(index)) {
-            set.add(index);
-            return cardDeck.remove(index);
-        }
-        return selectOneCard();
+    private Card selectOneCard(){
+        int size = cardDeck.size();
+        int index = (int) (Math.random() * size);
+        return cardDeck.remove(index);
     }
 
     public List<Card> getCardDeck() {
