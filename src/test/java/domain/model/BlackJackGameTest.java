@@ -44,17 +44,5 @@ class BlackJackGameTest {
         assertFalse(blackJackGame.getCardDeck().containsAll(player2.getCards()));
         assertTrue(player.getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
         assertTrue(player2.getCards().stream().noneMatch(card -> blackJackGame.getCardDeck().contains(card)));
-
-        for(Card card : blackJackGame.getCardDeck()){
-            System.out.println(card.toString());
-        }
-        System.out.println("======");
-        for(Card card : player.getCards()){
-            System.out.println(card.toString());
-        }
-        System.out.println("====");
-        for(Card card : player2.getCards()){
-            System.out.println(card.toString());
-        }
     }
 }
