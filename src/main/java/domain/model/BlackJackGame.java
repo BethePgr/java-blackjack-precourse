@@ -17,6 +17,7 @@ public class BlackJackGame {
         dealer = new Dealer();
         this.players = players;
         cardDeck = new ArrayList<>(CardFactory.create());
+        addCardToDealer(dealer);
         giveTwoCardsToEachPlayer();
     }
 
@@ -30,13 +31,24 @@ public class BlackJackGame {
         }
     }
 
+    private void addCardToDealer(Dealer dealer){
+        for(int i = 0;i<2;i++){
+            Card card = selectOneCard();
+            dealer.addCard(card);
+        }
+    }
+
     private void addCardToPlayer(Player player) {
         for(int i = 0;i<2;i++) {
-            int size = cardDeck.size();
-            int index = (int) (Math.random() * size);
-            Card card = cardDeck.remove(index);
+            Card card = selectOneCard();
             player.addCard(card);
         }
+    }
+
+    private Card selectOneCard(){
+        int size = cardDeck.size();
+        int index = (int) (Math.random() * size);
+        return cardDeck.remove(index);
     }
 
     public List<Card> getCardDeck(){
