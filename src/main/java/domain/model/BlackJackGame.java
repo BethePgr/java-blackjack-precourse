@@ -21,10 +21,6 @@ public class BlackJackGame {
         giveTwoCardsToEachPlayer();
     }
 
-    public void addPlayer(Player player){
-        players.add(player);
-    }
-
     private void giveTwoCardsToEachPlayer(){
         for(Player player : players){
             addCardToPlayer(player);
