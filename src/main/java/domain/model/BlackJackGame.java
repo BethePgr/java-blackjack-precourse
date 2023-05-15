@@ -5,15 +5,18 @@ import domain.model.card.CardFactory;
 import domain.model.user.Dealer;
 import domain.model.user.Player;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BlackJackGame {
 
     private final Dealer dealer;
     private final List<Player> players;
     private final List<Card> cardDeck;
+    private final Set<Integer> set = new HashSet<>();
 
-    public BlackJackGame(List<Player> players){
+    public BlackJackGame(List<Player> players) {
         dealer = new Dealer();
         this.players = players;
         cardDeck = new ArrayList<>(CardFactory.create());
@@ -21,41 +24,45 @@ public class BlackJackGame {
         giveTwoCardsToEachPlayer();
     }
 
-    private void giveTwoCardsToEachPlayer(){
-        for(Player player : players){
+    private void giveTwoCardsToEachPlayer() {
+        for (Player player : players) {
             addCardToPlayer(player);
         }
     }
 
-    private void addCardToDealer(Dealer dealer){
-        for(int i = 0;i<2;i++){
+    private void addCardToDealer(Dealer dealer) {
+        for (int i = 0; i < 2; i++) {
             Card card = selectOneCard();
             dealer.addCard(card);
         }
     }
 
     private void addCardToPlayer(Player player) {
-        for(int i = 0;i<2;i++) {
+        for (int i = 0; i < 2; i++) {
             Card card = selectOneCard();
             player.addCard(card);
         }
     }
 
-    private Card selectOneCard(){
-        int size = cardDeck.size();
-        int index = (int) (Math.random() * size);
-        return cardDeck.remove(index);
+    private Card selectOneCard() {
+
+        int index = (int) (Math.random() * cardDeck.size());
+        if (!set.contains(index)) {
+            set.add(index);
+            return cardDeck.remove(index);
+        }
+        return selectOneCard();
     }
 
-    public List<Card> getCardDeck(){
+    public List<Card> getCardDeck() {
         return cardDeck;
     }
 
-    public Dealer getDealer(){
+    public Dealer getDealer() {
         return dealer;
     }
 
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return players;
     }
 }
