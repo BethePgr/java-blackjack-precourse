@@ -11,6 +11,7 @@ public class ValidateInputPlayersName {
         validateMoreThanOnePlayer(names);
         for(String name : names){
             validatePlayerNameIsOnlyEnglish(name);
+            validateNameSizeBetween2And5(name);
         }
     }
 
@@ -24,6 +25,12 @@ public class ValidateInputPlayersName {
         String reg = "^[a-zA-Z]*$";
         if(!name.matches(reg)){
             throw new IllegalArgumentException("[ERROR] 플레이어의 이름은 영어만 사용 가능합니다.");
+        }
+    }
+
+    private static void validateNameSizeBetween2And5(String name){
+        if(name.length() < 2 || name.length() > 5){
+            throw new IllegalArgumentException("[ERROR] 이름은 두 글자와 다섯 글자 사이여야 합니다.");
         }
     }
 }
