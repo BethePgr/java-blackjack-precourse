@@ -14,13 +14,14 @@ public class OutputView {
         for(Player player : blackJackGame.getPlayers()){
             showPlayerCards(player);
         }
+        System.out.println();
     }
 
     private static void showDealerCards(Dealer dealer){
         System.out.println("딜러: " + showCardsDetail(dealer.getCards()));
     }
 
-    private static void showPlayerCards(Player player){
+    public static void showPlayerCards(Player player){
         System.out.println(player.getName()+ "카드: " + showCardsDetail(player.getCards()));
     }
 

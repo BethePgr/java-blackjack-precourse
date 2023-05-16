@@ -33,7 +33,7 @@ public class BlackJackGame {
         }
     }
 
-    private void addOneCardToDealer(Dealer dealer) {
+    public void addOneCardToDealer(Dealer dealer) {
         Card card = selectOneCard();
         dealer.addCard(card);
     }
@@ -44,7 +44,7 @@ public class BlackJackGame {
         }
     }
 
-    private void addOneCardToPlayer(Player player) {
+    public void addOneCardToPlayer(Player player) {
         Card card = selectOneCard();
         player.addCard(card);
     }
