@@ -11,36 +11,42 @@ import java.util.Set;
 
 public class BlackJackGame {
 
-    private final Dealer dealer;
+    private final Dealer dealer = new Dealer();;
     private final List<Player> players;
-    private final List<Card> cardDeck;
+    private final List<Card> cardDeck = new ArrayList<>(CardFactory.create());;
 
     public BlackJackGame(List<Player> players) {
-        dealer = new Dealer();
         this.players = players;
-        cardDeck = new ArrayList<>(CardFactory.create());
-        addCardToDealer(dealer);
+        addTwoCardsToDealer(dealer);
         giveTwoCardsToEachPlayer();
     }
 
     private void giveTwoCardsToEachPlayer() {
         for (Player player : players) {
-            addCardToPlayer(player);
+            addTwoCardsToPlayer(player);
         }
     }
 
-    private void addCardToDealer(Dealer dealer) {
+    private void addTwoCardsToDealer(Dealer dealer) {
         for (int i = 0; i < 2; i++) {
-            Card card = selectOneCard();
-            dealer.addCard(card);
+            addOneCardToDealer(dealer);
         }
     }
 
-    private void addCardToPlayer(Player player) {
+    private void addOneCardToDealer(Dealer dealer) {
+        Card card = selectOneCard();
+        dealer.addCard(card);
+    }
+
+    private void addTwoCardsToPlayer(Player player) {
         for (int i = 0; i < 2; i++) {
-            Card card = selectOneCard();
-            player.addCard(card);
+            addOneCardToPlayer(player);
         }
+    }
+
+    private void addOneCardToPlayer(Player player) {
+        Card card = selectOneCard();
+        player.addCard(card);
     }
 
     private Card selectOneCard(){
