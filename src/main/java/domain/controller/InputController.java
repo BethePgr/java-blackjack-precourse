@@ -1,6 +1,7 @@
 package domain.controller;
 
 import domain.validate.inputView.ValidateInputPlayerBettingMoney;
+import domain.validate.inputView.ValidateInputPlayerContinueGame;
 import domain.validate.inputView.ValidateInputPlayersName;
 import domain.view.InputView;
 import java.util.Arrays;
@@ -29,4 +30,16 @@ public class InputController {
             return inputPlayerBettingMoney(name);
         }
     }
+
+    public static String inputPlayerContinueGame(String name){
+        try{
+            String input = InputView.inputPlayerContinueGame(name);
+            ValidateInputPlayerContinueGame.validateContinue(input);
+            return input;
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return inputPlayerContinueGame(name);
+        }
+    }
+
 }
