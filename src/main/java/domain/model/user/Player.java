@@ -47,6 +47,9 @@ public class Player {
     }
 
     public int getScore(){
+        if(isHaveAceCard() && score<=11){
+            return score+10;
+        }
         return score;
     }
 
