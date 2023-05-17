@@ -53,8 +53,11 @@ public class OutputView {
     }
 
     private static String getSymbolOrNumber(Card card){
-        if(card.getSymbol().getScore() == 10 && !card.getSymbol().toString().startsWith("T")){
+        if(card.getSymbol().getScore() == 10 && !card.getSymbol().toString().equals("TEN")){
             return card.getSymbol().toString().substring(0,1);
+        }
+        if(card.getSymbol().getScore() == 1){
+            return "A";
         }
         return String.valueOf(card.getSymbol().getScore());
     }
