@@ -19,6 +19,11 @@ public class BlackJackController {
             do{
                 input = InputController.inputPlayerContinueGame(player.getName());
                 blackJackService.addOneMoreCardToPlayer(player,input);
+                if(blackJackService.isPlayerScoreOver21(player)){
+                    OutputView.showPlayerCards(player);
+                    OutputView.alreadyScoreOver21(player);
+                    break;
+                }
                 if(input.equals("y")) {
                     OutputView.showPlayerCards(player);
                 }
@@ -28,6 +33,7 @@ public class BlackJackController {
             blackJackService.addOneMoreCardToDealer();
             OutputView.dealerAddOneMoreCard();
         }
+        OutputView.printAllCardsAndScoreOfDealerAndPlayers(blackJackService.getBlackJackGame());
     }
 
     private static List<Player> createPlayerLists(List<String> names) {

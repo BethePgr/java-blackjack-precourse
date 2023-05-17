@@ -35,4 +35,9 @@ public class BlackJackService {
     public BlackJackGame getBlackJackGame(){
         return blackJackGame;
     }
+
+    public boolean isPlayerScoreOver21(Player player){
+        return player.getScore() > 21;
+    }
+
 }

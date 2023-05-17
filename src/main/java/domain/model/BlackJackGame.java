@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class BlackJackGame {
 
-    private final Dealer dealer = new Dealer();;
+    private final Dealer dealer = new Dealer();
     private final List<Player> players;
     private final List<Card> cardDeck = new ArrayList<>(CardFactory.create());;
 
