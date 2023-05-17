@@ -16,6 +16,7 @@ public class Player {
     private final List<Card> cards = new ArrayList<>();
     private int score = 0;
     private boolean haveAceCard;
+    private int benefit;
 
     public Player(String name, double bettingMoney) {
         this.name = name;

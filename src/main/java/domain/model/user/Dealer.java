@@ -18,6 +18,7 @@ public class Dealer {
     private final List<Card> cards = new ArrayList<>();
     private int score = 0;
     private boolean haveAceCard;
+    private int benefit = 0;
 
     public Dealer() {
     }
@@ -47,5 +48,9 @@ public class Dealer {
 
     public boolean isHaveAceCard(){
         return haveAceCard;
+    }
+
+    public int getBenefit(){
+        return benefit;
     }
 }
