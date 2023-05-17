@@ -61,12 +61,12 @@ public class Player {
         return bettingMoney;
     }
 
-    public void addBenefit(int benefit){
-        this.benefit += benefit;
+    public void addBenefit(double bettingMoney){
+        this.benefit += bettingMoney;
     }
 
-    public void minusBenefit(int benefit){
-        this.benefit -= benefit;
+    public void minusBenefit(double bettingMoney){
+        this.benefit -= bettingMoney;
     }
 
     public int getBenefit(){

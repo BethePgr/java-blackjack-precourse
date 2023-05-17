@@ -7,9 +7,13 @@ import java.util.List;
 public class BlackJackResult {
 
     private final BlackJackGame blackJackGame;
+    private final List<Player> playerList;
+    private final Dealer dealer;
 
     public BlackJackResult(List<Player> playerList){
         blackJackGame = new BlackJackGame(playerList);
+        this.playerList = playerList;
+        dealer = blackJackGame.getDealer();
     }
 
     /**
@@ -48,7 +52,20 @@ public class BlackJackResult {
 
     private void noBlackJack(){
         if(!isDealerBlackJack() && !isAnyPlayerBlackJack()){
+            calculateNoBlackJack();
+        }
+    }
 
+    private void calculateNoBlackJack(){
+        for(Player player : playerList){
+            if(dealer.getScore() > player.getScore()){
+                dealer.addBenefit(player.getBettingMoney());
+                player.minusBenefit(player.getBettingMoney());
+            }
+            if(dealer.getScore() < player.getScore()){
+                dealer.minusBenefit(player.getBettingMoney());
+                player.addBenefit(player.getBettingMoney());
+            }
         }
     }
 
@@ -58,8 +75,7 @@ public class BlackJackResult {
     }
 
     private boolean isAnyPlayerBlackJack(){
-        List<Player> players = blackJackGame.getPlayers();
-        return players.stream().anyMatch(player -> player.getCards().size() == 2 && player.getScore() == 21);
+        return playerList.stream().anyMatch(player -> player.getCards().size() == 2 && player.getScore() == 21);
     }
 
 }
