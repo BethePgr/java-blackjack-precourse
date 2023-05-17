@@ -4,11 +4,13 @@ import domain.model.BlackJackGame;
 import domain.model.card.Card;
 import domain.model.user.Dealer;
 import domain.model.user.Player;
+import domain.service.BlackJackService;
 import java.util.List;
 
 public class OutputView {
 
-    public static void printAllCardsOfDealerAndPlayers(BlackJackGame blackJackGame){
+    public static void printAllCardsOfDealerAndPlayers(BlackJackService blackJackService){
+        BlackJackGame blackJackGame = blackJackService.getBlackJackGame();
         System.out.println("딜러와 " + playerNamesString(blackJackGame.getPlayers()) + "에게 2장을 나누었습니다.");
         showDealerCards(blackJackGame.getDealer());
         for(Player player : blackJackGame.getPlayers()){
@@ -17,7 +19,8 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printAllCardsAndScoreOfDealerAndPlayers(BlackJackGame blackJackGame){
+    public static void printAllCardsAndScoreOfDealerAndPlayers(BlackJackService blackJackService){
+        BlackJackGame blackJackGame = blackJackService.getBlackJackGame();
         showDealerCardsAndScore(blackJackGame.getDealer());
         for(Player player : blackJackGame.getPlayers()){
             showPlayerCardsAndScore(player);

@@ -13,7 +13,7 @@ public class BlackJackController {
         List<String> names = InputController.inputPlayerNames();
         List<Player> playerLists = createPlayerLists(names);
         BlackJackService blackJackService = new BlackJackService(playerLists);
-        OutputView.printAllCardsOfDealerAndPlayers(blackJackService.getBlackJackGame());
+        OutputView.printAllCardsOfDealerAndPlayers(blackJackService);
         for(Player player : playerLists){
             String input;
             do{
@@ -33,7 +33,7 @@ public class BlackJackController {
             blackJackService.addOneMoreCardToDealer();
             OutputView.dealerAddOneMoreCard();
         }
-        OutputView.printAllCardsAndScoreOfDealerAndPlayers(blackJackService.getBlackJackGame());
+        OutputView.printAllCardsAndScoreOfDealerAndPlayers(blackJackService);
     }
 
     private static List<Player> createPlayerLists(List<String> names) {
