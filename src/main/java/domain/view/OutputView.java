@@ -17,6 +17,14 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printAllCardsAndScoreOfDealerAndPlayers(BlackJackGame blackJackGame){
+        showDealerCardsAndScore(blackJackGame.getDealer());
+        for(Player player : blackJackGame.getPlayers()){
+            showPlayerCardsAndScore(player);
+        }
+        System.out.println();
+    }
+
     private static void showDealerCards(Dealer dealer){
         System.out.println("딜러: " + showCardsDetail(dealer.getCards()));
     }
@@ -50,5 +58,19 @@ public class OutputView {
 
     public static void dealerAddOneMoreCard(){
         System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
+    }
+
+    public static void alreadyScoreOver21(Player player){
+        System.out.println(player.getName() + "은 이미 점수가 21점이 넘었으므로 더 이상 카드를 뽑을 수 없습니다.");
+    }
+
+    public static void showPlayerCardsAndScore(Player player){
+        System.out.println(player.getName()+ "카드: " + showCardsDetail(player.getCards()) +
+            "  - 결과:" + player.getScore());
+    }
+
+    public static void showDealerCardsAndScore(Dealer dealer){
+        System.out.println("딜러: " + showCardsDetail(dealer.getCards()) + " - 결과 : " + dealer.getScore());
+
     }
 }
