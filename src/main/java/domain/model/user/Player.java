@@ -56,4 +56,20 @@ public class Player {
     public boolean isHaveAceCard(){
         return haveAceCard;
     }
+
+    public double getBettingMoney(){
+        return bettingMoney;
+    }
+
+    public void addBenefit(int benefit){
+        this.benefit += benefit;
+    }
+
+    public void minusBenefit(int benefit){
+        this.benefit -= benefit;
+    }
+
+    public int getBenefit(){
+        return benefit;
+    }
 }

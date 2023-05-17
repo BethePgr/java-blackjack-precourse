@@ -52,6 +52,14 @@ public class Dealer {
         return haveAceCard;
     }
 
+    public void addBenefit(int benefit){
+        this.benefit += benefit;
+    }
+
+    public void minusBenefit(int benefit){
+        this.benefit -= benefit;
+    }
+
     public int getBenefit(){
         return benefit;
     }
