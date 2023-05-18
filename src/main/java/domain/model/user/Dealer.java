@@ -34,33 +34,34 @@ public class Dealer {
         return cards;
     }
 
-    private void addScore(Card card){
-        score+= card.getSymbol().getScore();
+    private void addScore(Card card) {
+        score += card.getSymbol().getScore();
     }
 
-    private boolean aceCard(){
+    private boolean aceCard() {
         return cards.stream().anyMatch(card -> card.getSymbol() == Symbol.ACE);
     }
 
-    public int getScore(){
-        if(isHaveAceCard() && score<=11){
-            return score+10;
+    public int getScore() {
+        if (isHaveAceCard() && score <= 11) {
+            return score + 10;
         }
         return score;
     }
-    public boolean isHaveAceCard(){
+
+    public boolean isHaveAceCard() {
         return haveAceCard;
     }
 
-    public void addBenefit(double bettingMoney){
+    public void addBenefit(double bettingMoney) {
         this.benefit += bettingMoney;
     }
 
-    public void minusBenefit(double bettingMoney){
+    public void minusBenefit(double bettingMoney) {
         this.benefit -= bettingMoney;
     }
 
-    public int getBenefit(){
+    public int getBenefit() {
         return benefit;
     }
 }

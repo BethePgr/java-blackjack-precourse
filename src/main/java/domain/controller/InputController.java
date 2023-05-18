@@ -10,33 +10,33 @@ import java.util.stream.Collectors;
 
 public class InputController {
 
-    public static List<String> inputPlayerNames(){
+    public static List<String> inputPlayerNames() {
         try {
             String input = InputView.inputPlayersName();
             ValidateInputPlayersName.validatePlayersName(input);
             return Arrays.stream(input.split(",")).collect(Collectors.toList());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputPlayerNames();
         }
     }
 
-    public static int inputPlayerBettingMoney(String name){
+    public static int inputPlayerBettingMoney(String name) {
         try {
             String input = InputView.inputPlayerBettingMoney(name);
             return ValidateInputPlayerBettingMoney.validateBettingMoney(input);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputPlayerBettingMoney(name);
         }
     }
 
-    public static String inputPlayerContinueGame(String name){
-        try{
+    public static String inputPlayerContinueGame(String name) {
+        try {
             String input = InputView.inputPlayerContinueGame(name);
             ValidateInputPlayerContinueGame.validateContinue(input);
             return input;
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputPlayerContinueGame(name);
         }

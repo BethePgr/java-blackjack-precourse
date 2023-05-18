@@ -15,43 +15,43 @@ public class BlackJackController {
         List<Player> playerLists = createPlayers();
         BlackJackService blackJackService = new BlackJackService(playerLists);
         OutputView.printAllCardsOfDealerAndPlayers(blackJackService);
-        for(Player player : playerLists){
-            continuePlayerAddCard(blackJackService,player);
+        for (Player player : playerLists) {
+            continuePlayerAddCard(blackJackService, player);
         }
         printIfDealerScoreUnder16(blackJackService);
         printResultOfGame(blackJackService);
     }
 
-    private static void continuePlayerAddCard(BlackJackService blackJackService,Player player){
+    private static void continuePlayerAddCard(BlackJackService blackJackService, Player player) {
         String input;
-        do{
+        do {
             input = InputController.inputPlayerContinueGame(player.getName());
-            blackJackService.addOneMoreCardToPlayer(player,input);
-            if(blackJackService.isPlayerScoreOver21(player)){
+            blackJackService.addOneMoreCardToPlayer(player, input);
+            if (blackJackService.isPlayerScoreOver21(player)) {
                 OutputView.showPlayerCards(player);
                 OutputView.alreadyScoreOver21(player);
                 break;
             }
-            if(input.equals("y")) {
+            if (input.equals("y")) {
                 OutputView.showPlayerCards(player);
             }
-        }while(input.equals("y"));
+        } while (input.equals("y"));
     }
 
-    private static void printResultOfGame(BlackJackService blackJackService){
+    private static void printResultOfGame(BlackJackService blackJackService) {
         OutputView.printAllCardsAndScoreOfDealerAndPlayers(blackJackService);
         blackJackService.makeResult();
         OutputView.showAllResult(blackJackService);
     }
 
-    private static void printIfDealerScoreUnder16(BlackJackService blackJackService){
-        if(blackJackService.isDealerScoreUnder16()) {
+    private static void printIfDealerScoreUnder16(BlackJackService blackJackService) {
+        if (blackJackService.isDealerScoreUnder16()) {
             blackJackService.addOneMoreCardToDealer();
             OutputView.dealerAddOneMoreCard();
         }
     }
 
-    private static List<Player> createPlayers(){
+    private static List<Player> createPlayers() {
         List<String> names = InputController.inputPlayerNames();
         return createStringToPlayerLists(names);
     }
@@ -59,7 +59,7 @@ public class BlackJackController {
 
     private static List<Player> createStringToPlayerLists(List<String> names) {
         List<Player> playerList = new ArrayList<>();
-        for(String name : names){
+        for (String name : names) {
             int money = InputController.inputPlayerBettingMoney(name);
             Player player = new Player(name, money);
             playerList.add(player);

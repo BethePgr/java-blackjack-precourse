@@ -13,7 +13,8 @@ public class BlackJackGame {
 
     private final Dealer dealer = new Dealer();
     private final List<Player> players;
-    private final List<Card> cardDeck = new ArrayList<>(CardFactory.create());;
+    private final List<Card> cardDeck = new ArrayList<>(CardFactory.create());
+    ;
 
     public BlackJackGame(List<Player> players) {
         this.players = players;
@@ -49,7 +50,7 @@ public class BlackJackGame {
         player.addCard(card);
     }
 
-    private Card selectOneCard(){
+    private Card selectOneCard() {
         int size = cardDeck.size();
         int index = (int) (Math.random() * size);
         return cardDeck.remove(index);

@@ -11,6 +11,7 @@ import java.util.List;
  * 게임 참여자를 의미하는 객체
  */
 public class Player {
+
     private final String name;
     private final double bettingMoney;
     private final List<Card> cards = new ArrayList<>();
@@ -30,46 +31,46 @@ public class Player {
     }
 
     // TODO 추가 기능 구현
-    public List<Card> getCards(){
+    public List<Card> getCards() {
         return cards;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    private void addScore(Card card){
-        score+= card.getSymbol().getScore();
+    private void addScore(Card card) {
+        score += card.getSymbol().getScore();
     }
 
-    private boolean aceCard(){
+    private boolean aceCard() {
         return cards.stream().anyMatch(card -> card.getSymbol() == Symbol.ACE);
     }
 
-    public int getScore(){
-        if(isHaveAceCard() && score<=11){
-            return score+10;
+    public int getScore() {
+        if (isHaveAceCard() && score <= 11) {
+            return score + 10;
         }
         return score;
     }
 
-    public boolean isHaveAceCard(){
+    public boolean isHaveAceCard() {
         return haveAceCard;
     }
 
-    public double getBettingMoney(){
+    public double getBettingMoney() {
         return bettingMoney;
     }
 
-    public void addBenefit(double bettingMoney){
+    public void addBenefit(double bettingMoney) {
         this.benefit += bettingMoney;
     }
 
-    public void minusBenefit(double bettingMoney){
+    public void minusBenefit(double bettingMoney) {
         this.benefit -= bettingMoney;
     }
 
-    public int getBenefit(){
+    public int getBenefit() {
         return benefit;
     }
 }

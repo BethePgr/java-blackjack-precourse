@@ -6,6 +6,7 @@ import java.util.Objects;
  * 카드 한장을 의미하는 객체
  */
 public class Card {
+
     private final Symbol symbol;
 
     private final Type type;
@@ -19,11 +20,15 @@ public class Card {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Card card = (Card) o;
         return symbol == card.symbol &&
-                type == card.type;
+            type == card.type;
     }
 
     @Override
@@ -34,16 +39,16 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
-                "symbol=" + symbol +
-                ", type=" + type +
-                '}';
+            "symbol=" + symbol +
+            ", type=" + type +
+            '}';
     }
 
-    public Symbol getSymbol(){
+    public Symbol getSymbol() {
         return symbol;
     }
 
-    public Type getType(){
+    public Type getType() {
         return type;
     }
 }
