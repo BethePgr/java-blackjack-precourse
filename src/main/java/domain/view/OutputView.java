@@ -1,6 +1,7 @@
 package domain.view;
 
 import domain.model.BlackJackGame;
+import domain.model.BlackJackResult;
 import domain.model.card.Card;
 import domain.model.user.Dealer;
 import domain.model.user.Player;
@@ -77,6 +78,22 @@ public class OutputView {
 
     public static void showDealerCardsAndScore(Dealer dealer){
         System.out.println("딜러: " + showCardsDetail(dealer.getCards()) + " - 결과 : " + dealer.getScore());
+    }
 
+    public static void showAllResult(BlackJackService service){
+        BlackJackGame game = service.getBlackJackGame();
+        System.out.println("## 최종 수익");
+        showDealerResult(game.getDealer());
+        showPlayersResult(game.getPlayers());
+    }
+
+    private static void showDealerResult(Dealer dealer) {
+        System.out.println("딜러:" + dealer.getBenefit());
+    }
+
+    private static void showPlayersResult(List<Player> players){
+        for(Player player : players){
+            System.out.println(player.getName()+":"+player.getBenefit());
+        }
     }
 }
