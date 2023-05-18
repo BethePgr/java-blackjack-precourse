@@ -7,24 +7,13 @@ import java.util.List;
 
 public class BlackJackResult {
 
-    private final BlackJackService blackJackService;
     private final List<Player> playerList;
     private final Dealer dealer;
 
-    public BlackJackResult(BlackJackService blackJackService){
-        this.blackJackService = blackJackService;
-        this.playerList = blackJackService.getBlackJackGame().getPlayers();
-        dealer = blackJackService.getBlackJackGame().getDealer();
+    public BlackJackResult(List<Player> playerList,Dealer dealer){
+        this.playerList = playerList;
+        this.dealer =dealer;
     }
-
-    /**
-     * -블랙잭이 존재하는 경우
-     *      1.딜러와 특정 플레이어가 블랙잭인 경우
-     *      2.딜러는 아니지만 특정 플레이어만 블랙잭인 경우
-     *      3.딜러만 블랙잭인 경우
-     * -블랙잭이 존재하지 않는 경우
-     *      각각의 플레이어의 점수와 딜러의 점수를 비교하기
-     */
 
     public void gameResult(){
         if(dealer.getScore() > 21){
@@ -41,6 +30,7 @@ public class BlackJackResult {
     private void dealerScoreUnder21() {
         for(Player player : playerList){
             addMoneyPlayerBlackJack(player);
+            playerScoreOver21(player);
             if(player.getScore() > dealer.getScore() && !isPlayerBlackJack(player) && player.getScore() <=21){
                 player.addBenefit(player.getBettingMoney());
                 dealer.minusBenefit(player.getBettingMoney());
@@ -49,7 +39,6 @@ public class BlackJackResult {
                 player.minusBenefit(player.getBettingMoney());
                 dealer.addBenefit(player.getBettingMoney());
             }
-            playerScoreOver21(player);
         }
     }
 

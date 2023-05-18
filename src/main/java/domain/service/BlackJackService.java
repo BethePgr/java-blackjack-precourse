@@ -1,6 +1,7 @@
 package domain.service;
 
 import domain.model.BlackJackGame;
+import domain.model.BlackJackResult;
 import domain.model.user.Dealer;
 import domain.model.user.Player;
 import java.util.List;
@@ -30,6 +31,12 @@ public class BlackJackService {
     public void addOneMoreCardToDealer(){
         Dealer dealer = blackJackGame.getDealer();
         blackJackGame.addOneCardToDealer(dealer);
+    }
+
+    public void makeResult(){
+        BlackJackResult blackJackResult = new BlackJackResult(blackJackGame.getPlayers(),
+            blackJackGame.getDealer());
+        blackJackResult.gameResult();
     }
 
     public BlackJackGame getBlackJackGame(){
