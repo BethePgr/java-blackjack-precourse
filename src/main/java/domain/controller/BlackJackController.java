@@ -1,6 +1,7 @@
 package domain.controller;
 
 import domain.model.BlackJackGame;
+import domain.model.BlackJackResult;
 import domain.model.user.Player;
 import domain.service.BlackJackService;
 import domain.view.OutputView;
@@ -34,6 +35,8 @@ public class BlackJackController {
             OutputView.dealerAddOneMoreCard();
         }
         OutputView.printAllCardsAndScoreOfDealerAndPlayers(blackJackService);
+        blackJackService.makeResult();
+        OutputView.showAllResult(blackJackService);
     }
 
     private static List<Player> createPlayerLists(List<String> names) {
