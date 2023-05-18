@@ -2,18 +2,19 @@ package domain.model;
 
 import domain.model.user.Dealer;
 import domain.model.user.Player;
+import domain.service.BlackJackService;
 import java.util.List;
 
 public class BlackJackResult {
 
-    private final BlackJackGame blackJackGame;
+    private final BlackJackService blackJackService;
     private final List<Player> playerList;
     private final Dealer dealer;
 
-    public BlackJackResult(List<Player> playerList){
-        blackJackGame = new BlackJackGame(playerList);
-        this.playerList = playerList;
-        dealer = blackJackGame.getDealer();
+    public BlackJackResult(BlackJackService blackJackService){
+        this.blackJackService = blackJackService;
+        this.playerList = blackJackService.getBlackJackGame().getPlayers();
+        dealer = blackJackService.getBlackJackGame().getDealer();
     }
 
     /**
@@ -26,56 +27,75 @@ public class BlackJackResult {
      */
 
     public void gameResult(){
-        dealerAndPlayerBlackJack();
-        onlyPlayerBlackJack();
-        onlyDealerBlackJack();
-        noBlackJack();
-    }
-
-    private void dealerAndPlayerBlackJack() {
-        if(isDealerBlackJack() && isAnyPlayerBlackJack()){
-
+        if(dealer.getScore() > 21){
+            dealerScoreOver21();
+        }
+        if(isDealerBlackJack()){
+            dealerBlackJack();
+        }
+        if(dealer.getScore() <= 21){
+            dealerScoreUnder21();
         }
     }
 
-    private void onlyPlayerBlackJack() {
-        if(!isDealerBlackJack() && isAnyPlayerBlackJack()){
-
-        }
-    }
-
-    private void onlyDealerBlackJack(){
-        if(isDealerBlackJack() && !isAnyPlayerBlackJack()){
-
-        }
-    }
-
-    private void noBlackJack(){
-        if(!isDealerBlackJack() && !isAnyPlayerBlackJack()){
-            calculateNoBlackJack();
-        }
-    }
-
-    private void calculateNoBlackJack(){
+    private void dealerScoreUnder21() {
         for(Player player : playerList){
-            if(dealer.getScore() > player.getScore()){
-                dealer.addBenefit(player.getBettingMoney());
-                player.minusBenefit(player.getBettingMoney());
-            }
-            if(dealer.getScore() < player.getScore()){
-                dealer.minusBenefit(player.getBettingMoney());
+            addMoneyPlayerBlackJack(player);
+            if(player.getScore() > dealer.getScore() && !isPlayerBlackJack(player) && player.getScore() <=21){
                 player.addBenefit(player.getBettingMoney());
+                dealer.minusBenefit(player.getBettingMoney());
+            }
+            if(dealer.getScore() > player.getScore()){
+                player.minusBenefit(player.getBettingMoney());
+                dealer.addBenefit(player.getBettingMoney());
+            }
+            playerScoreOver21(player);
+        }
+    }
+
+    private void dealerBlackJack() {
+        for(Player player : playerList){
+            if(!isPlayerBlackJack(player)) {
+                player.minusBenefit(player.getBettingMoney());
+                dealer.addBenefit(player.getBettingMoney());
             }
         }
+    }
+
+    private void dealerScoreOver21() {
+        for(Player player : playerList){
+            playerScoreOver21(player);
+            addMoneyPlayerBlackJack(player);
+            playerWinScoreUnder21(player);
+        }
+    }
+
+    private void playerScoreOver21(Player player){
+        if(player.getScore() > 21){
+            player.minusBenefit(player.getBettingMoney());
+            dealer.addBenefit(player.getBettingMoney());
+        }
+    }
+
+    private void playerWinScoreUnder21(Player player){
+        if(player.getScore() <= 21){
+            player.addBenefit(player.getBettingMoney());
+            dealer.minusBenefit(player.getBettingMoney());
+        }
+    }
+
+    private boolean isPlayerBlackJack(Player player){
+        return player.getScore() == 21 && player.getCards().size() == 2;
     }
 
     private boolean isDealerBlackJack(){
-        Dealer dealer = blackJackGame.getDealer();
         return dealer.getCards().size() == 2 && dealer.getScore() == 21;
     }
 
-    private boolean isAnyPlayerBlackJack(){
-        return playerList.stream().anyMatch(player -> player.getCards().size() == 2 && player.getScore() == 21);
+    private void addMoneyPlayerBlackJack(Player player){
+        if(isPlayerBlackJack(player)){
+            player.addBenefit(player.getBettingMoney() * 1.5);
+            dealer.minusBenefit(player.getBettingMoney() * 1.5);
+        }
     }
-
 }
