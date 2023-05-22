@@ -13,6 +13,7 @@ public class ValidateInputPlayersName {
             validatePlayerNameIsOnlyEnglish(name);
             validateNameSizeBetween2And5(name);
         }
+         nameDistinct(input);
     }
 
     private static void validateMoreThanOnePlayer(List<String> names) {
@@ -31,6 +32,13 @@ public class ValidateInputPlayersName {
     private static void validateNameSizeBetween2And5(String name) {
         if (name.length() < 2 || name.length() > 5) {
             throw new IllegalArgumentException("[ERROR] 이름은 두 글자와 다섯 글자 사이여야 합니다.");
+        }
+    }
+
+    private static void nameDistinct(String input){
+        List<String> names = Arrays.stream(input.split(",")).collect(Collectors.toList());
+        if(names.stream().distinct().count() != names.size()){
+            throw new IllegalArgumentException("[ERROR] 이름은 고유해야합니다.");
         }
     }
 }

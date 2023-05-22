@@ -2,6 +2,9 @@ package domain.validate.inputView;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -56,4 +59,12 @@ class ValidateInputPlayersNameTest {
         assertThrows(IllegalArgumentException.class,() -> ValidateInputPlayersName.validatePlayersName(name));
     }
 
+    @Test
+    @DisplayName("이름이 다섯 글자를 넘어서는게 있으므로 에러를 던지게 된다.")
+    void test6_() throws Exception {
+        String input = "one,two,one";
+        List<String> names = Arrays.stream(input.split(",")).collect(Collectors.toList());
+
+        System.out.println(names.stream().distinct().count());
+    }
 }
